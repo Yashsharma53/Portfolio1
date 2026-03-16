@@ -92,7 +92,9 @@ export default function Scene({ mouseX = 0, mouseY = 0 }: SceneProps) {
 
       {/* 3D content wrapped in Suspense */}
       <Suspense fallback={null}>
-        <SharinganModel />
+        <group position={[2, 0, 0]}>
+          <SharinganModel />
+        </group>
         <FloatingParticles />
         <AnimatedTorus />
       </Suspense>

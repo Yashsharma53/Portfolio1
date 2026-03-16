@@ -170,9 +170,9 @@ export default function Hero() {
         <div className="accent-el absolute top-16 right-1/3 w-24 h-[1px] bg-gradient-to-l from-[#DC2626] to-transparent" />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* Left side — text content */}
-        <div className="flex flex-col gap-6">
+      <div className="relative z-10 w-full">
+        {/* Text content — left aligned, shifted right with margin */}
+        <div className="flex flex-col gap-6" style={{ paddingLeft: "clamp(3rem, 15vw, 20rem)" }}>
           <div ref={nameRef}>
             <h1 className="text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter text-[#E5E5E5] leading-none">
               {renderChars("YASH", "char-yash")}
@@ -189,19 +189,14 @@ export default function Hero() {
             Software Engineer | ML Enthusiast | Tech Ninja
           </p>
 
-          <div ref={ctaRef} className="flex flex-wrap gap-4 mt-4">
-            <MagneticButton href="#projects" variant="filled">
+          <div ref={ctaRef} className="flex items-center gap-6 mt-6">
+            <MagneticButton href="#projects" variant="filled" className="px-9 py-4 text-base">
               View Projects
             </MagneticButton>
-            <MagneticButton href="#contact" variant="outlined">
+            <MagneticButton href="#contact" variant="outlined" className="px-9 py-4 text-base">
               Contact Me
             </MagneticButton>
           </div>
-        </div>
-
-        {/* Right side — placeholder for 3D scene overlay */}
-        <div className="hidden lg:flex items-center justify-center">
-          <div className="w-full aspect-square max-w-lg rounded-full border border-[#DC2626]/10" />
         </div>
       </div>
 

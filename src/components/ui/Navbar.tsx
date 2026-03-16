@@ -54,11 +54,11 @@ export default function Navbar() {
       <nav
         className="fixed z-50 transition-all duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
         style={{
-          /* FULL width at top → shrinks to pill on scroll */
+          /* FULL width at top → slightly narrower pill on scroll */
           top: scrolled ? "12px" : "0px",
           left: scrolled ? "50%" : "0",
           transform: scrolled ? "translateX(-50%)" : "translateX(0)",
-          width: scrolled ? "min(92%, 900px)" : "100%",
+          width: scrolled ? "min(96%, 1200px)" : "100%",
           borderRadius: scrolled ? "16px" : "0px",
           background: scrolled
             ? "rgba(10, 10, 10, 0.88)"
@@ -82,8 +82,8 @@ export default function Navbar() {
         <div
           className="mx-auto flex items-center justify-between transition-all duration-700"
           style={{
-            maxWidth: scrolled ? "900px" : "1280px",
-            padding: scrolled ? "10px 24px" : "16px 40px",
+            maxWidth: "100%",
+            padding: scrolled ? "14px 48px" : "16px 64px",
           }}
         >
           {/* Logo */}
@@ -92,7 +92,7 @@ export default function Navbar() {
             className="font-bold tracking-wider transition-all duration-500"
             style={{
               color: "#DC2626",
-              fontSize: scrolled ? "20px" : "26px",
+              fontSize: scrolled ? "24px" : "26px",
             }}
           >
             YS<span className="text-white">.</span>
@@ -100,7 +100,7 @@ export default function Navbar() {
 
           {/* Desktop Links */}
           <ul className="hidden items-center md:flex transition-all duration-500"
-            style={{ gap: scrolled ? "20px" : "32px" }}
+            style={{ gap: scrolled ? "28px" : "32px" }}
           >
             {NAV_LINKS.map((link) => {
               const isActive = activeSection === link.href.replace("#", "");
@@ -110,7 +110,7 @@ export default function Navbar() {
                     onClick={() => scrollTo(link.href)}
                     className="relative py-1 font-medium uppercase tracking-widest transition-all duration-300"
                     style={{
-                      fontSize: scrolled ? "12px" : "13px",
+                      fontSize: scrolled ? "13px" : "13px",
                       color: isActive ? "#DC2626" : "rgba(255,255,255,0.6)",
                     }}
                     onMouseEnter={(e) => {
