@@ -120,9 +120,9 @@ export const interests = [
 ];
 
 export const socialLinks = [
-  { label: "GitHub", url: "https://github.com/yashsharma" },
+  { label: "GitHub", url: "https://github.com/Yashsharma53/" },
   { label: "LinkedIn", url: "https://linkedin.com/in/yashsharma" },
-  { label: "Twitter", url: "https://twitter.com/yashsharma" },
+  { label: "WhatsApp", url: "https://wa.me/917701808288" },
 ];
 
 export const navItems = [

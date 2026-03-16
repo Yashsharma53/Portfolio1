@@ -56,27 +56,51 @@ function MangekyoBlade({ rotation }: { rotation: number }) {
 // ---------------------------------------------------------------------------
 // SharinganModel
 // ---------------------------------------------------------------------------
-export default function SharinganModel() {
+interface SharinganModelProps {
+  scrollProgress?: number;
+}
+
+export default function SharinganModel({ scrollProgress = 0 }: SharinganModelProps) {
   const groupRef = useRef<THREE.Group>(null);
+  const wrapperRef = useRef<THREE.Group>(null);
   const innerRef = useRef<THREE.Group>(null);
   const { viewport } = useThree();
 
   // Scale proportionally to viewport (smaller on mobile)
   const scale = Math.min(viewport.width, viewport.height) / 6;
 
+  // Smooth lerp target for position
+  const targetPos = useRef(new THREE.Vector3(2, 0, 0));
+
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
+    const p = scrollProgress;
 
-    // Slow rotation of the whole Sharingan
+    // Lerp position: right side (hero) → left side (about)
+    // Hero: x=2, About: x=-3 (left side where empty space is)
+    targetPos.current.set(
+      2 - p * 5,             // 2 → -3
+      0,                     // stay vertically centered
+      0
+    );
+
+    if (wrapperRef.current) {
+      wrapperRef.current.position.lerp(targetPos.current, 0.08);
+    }
+
+    // Rotation speed: slow (0.15) → fast (1.5) based on scroll
+    const rotSpeed = 0.15 + p * 1.35;
+
     if (groupRef.current) {
-      groupRef.current.rotation.z = t * 0.15;
+      groupRef.current.rotation.z = t * rotSpeed;
       // Floating bob
       groupRef.current.position.y = Math.sin(t * 0.6) * 0.12;
     }
 
-    // Counter-rotate inner pattern slightly for visual interest
+    // Counter-rotate inner pattern
+    const innerSpeed = 0.08 + p * 0.6;
     if (innerRef.current) {
-      innerRef.current.rotation.z = -t * 0.08;
+      innerRef.current.rotation.z = -t * innerSpeed;
     }
   });
 
@@ -87,6 +111,7 @@ export default function SharinganModel() {
   );
 
   return (
+    <group ref={wrapperRef} position={[2, 0, 0]}>
     <group ref={groupRef} scale={[scale, scale, scale]}>
       {/* ── Outer ring ────────────────────────────────────── */}
       <mesh>
@@ -135,6 +160,7 @@ export default function SharinganModel() {
           side={THREE.DoubleSide}
         />
       </mesh>
+    </group>
     </group>
   );
 }

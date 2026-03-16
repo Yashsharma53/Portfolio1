@@ -37,9 +37,10 @@ function CameraRig({
 interface SceneProps {
   mouseX?: number;
   mouseY?: number;
+  scrollProgress?: number;
 }
 
-export default function Scene({ mouseX = 0, mouseY = 0 }: SceneProps) {
+export default function Scene({ mouseX = 0, mouseY = 0, scrollProgress = 0 }: SceneProps) {
   const isMobile =
     typeof window !== "undefined" && window.innerWidth < 768;
 
@@ -92,9 +93,7 @@ export default function Scene({ mouseX = 0, mouseY = 0 }: SceneProps) {
 
       {/* 3D content wrapped in Suspense */}
       <Suspense fallback={null}>
-        <group position={[2, 0, 0]}>
-          <SharinganModel />
-        </group>
+        <SharinganModel scrollProgress={scrollProgress} />
         <FloatingParticles />
         <AnimatedTorus />
       </Suspense>

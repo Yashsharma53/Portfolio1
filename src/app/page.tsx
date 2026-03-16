@@ -22,6 +22,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [showScene, setShowScene] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -42,6 +43,20 @@ export default function Home() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const aboutEl = document.getElementById("about");
+      if (!aboutEl) return;
+      const heroHeight = window.innerHeight;
+      const aboutTop = aboutEl.offsetTop;
+      // 0 = top of page, 1 = about section reached
+      const progress = Math.min(1, Math.max(0, window.scrollY / (aboutTop - heroHeight * 0.3)));
+      setScrollProgress(progress);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <Loader onComplete={() => setLoading(false)} />
@@ -53,7 +68,7 @@ export default function Home() {
           {/* 3D Background Scene */}
           {showScene && (
             <div className="canvas-container">
-              <Scene mouseX={mousePos.x} mouseY={mousePos.y} />
+              <Scene mouseX={mousePos.x} mouseY={mousePos.y} scrollProgress={scrollProgress} />
             </div>
           )}
 

@@ -162,16 +162,17 @@ html.lenis, html.lenis body {
 /* Section transition */
 section {
   position: relative;
+  scroll-margin-top: 100px;
 }
 
-/* Canvas container — always behind content, visible through transparent sections */
+/* Canvas container — in front of content, non-interactive */
 .canvas-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: 20;
   pointer-events: none;
 }
 
