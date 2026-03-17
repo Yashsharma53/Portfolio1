@@ -287,30 +287,25 @@ export default function Navbar() {
         onClick={() => setMobileOpen(false)}
       />
 
-      {/* Mobile Slide-in Panel */}
+      {/* Mobile Slide-in Panel — compact from right */}
       <div
-        className={`fixed top-0 right-0 z-40 flex h-full flex-col transition-transform duration-500 ease-in-out md:hidden ${
+        className={`fixed top-0 right-0 z-40 flex flex-col transition-transform duration-400 ease-in-out md:hidden ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{
-          width: "100%",
-          background: lightMode ? "rgba(255, 255, 255, 0.98)" : "rgba(10, 10, 10, 0.98)",
+          width: "260px",
+          height: "100%",
+          background: lightMode ? "rgba(255, 255, 255, 0.97)" : "rgba(10, 10, 10, 0.97)",
           backdropFilter: "blur(20px)",
+          borderLeft: "1px solid rgba(220, 38, 38, 0.15)",
+          boxShadow: mobileOpen ? "-8px 0 30px rgba(0,0,0,0.3)" : "none",
         }}
       >
-        {/* Close area at top */}
-        <div style={{ height: "80px" }} />
+        {/* Top spacing for navbar */}
+        <div style={{ height: "70px" }} />
 
-        {/* Nav links — centered */}
-        <div style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "0",
-          paddingBottom: "80px",
-        }}>
+        {/* Nav links with icons */}
+        <div style={{ display: "flex", flexDirection: "column", padding: "12px 0" }}>
           {NAV_LINKS.map((link, i) => {
             const isActive = activeSection === link.href.replace("#", "");
             return (
@@ -318,25 +313,66 @@ export default function Navbar() {
                 key={link.href}
                 onClick={() => scrollTo(link.href)}
                 style={{
-                  display: "block",
-                  width: "100%",
-                  padding: "18px 0",
-                  fontSize: "1.1rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "14px",
+                  padding: "14px 24px",
+                  fontSize: "0.85rem",
                   fontWeight: isActive ? "700" : "500",
                   textTransform: "uppercase",
-                  letterSpacing: "0.15em",
-                  textAlign: "center",
+                  letterSpacing: "0.12em",
+                  textAlign: "left",
                   color: isActive ? "#DC2626" : (lightMode ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.6)"),
-                  background: "none",
+                  background: isActive ? "rgba(220, 38, 38, 0.08)" : "none",
                   border: "none",
+                  borderLeft: isActive ? "3px solid #DC2626" : "3px solid transparent",
                   cursor: "pointer",
                   transition: "all 0.3s ease",
                   opacity: mobileOpen ? 1 : 0,
-                  transform: mobileOpen ? "translateY(0)" : "translateY(20px)",
-                  transitionDelay: mobileOpen ? `${i * 80}ms` : "0ms",
-                  borderBottom: isActive ? "2px solid #DC2626" : "1px solid rgba(220, 38, 38, 0.08)",
+                  transform: mobileOpen ? "translateX(0)" : "translateX(30px)",
+                  transitionDelay: mobileOpen ? `${i * 60}ms` : "0ms",
                 }}
               >
+                {/* Icon */}
+                <span style={{ width: "20px", height: "20px", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  {link.label === "Home" && (
+                    <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                      <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                  )}
+                  {link.label === "About" && (
+                    <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                  )}
+                  {link.label === "Skills" && (
+                    <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <polyline points="16 18 22 12 16 6" />
+                      <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                  )}
+                  {link.label === "Projects" && (
+                    <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                      <line x1="8" y1="21" x2="16" y2="21" />
+                      <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
+                  )}
+                  {link.label === "Experience" && (
+                    <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    </svg>
+                  )}
+                  {link.label === "Contact" && (
+                    <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  )}
+                </span>
                 {link.label}
               </button>
             );
