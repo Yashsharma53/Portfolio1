@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "@/components/ui/MagneticButton";
@@ -15,6 +15,16 @@ export default function Hero() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const socialRef = useRef<HTMLDivElement>(null);
   const accentRef = useRef<HTMLDivElement>(null);
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const [pastHero, setPastHero] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setPastHero(window.scrollY > window.innerHeight * 0.6);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -204,6 +214,7 @@ export default function Hero() {
       <div
         ref={socialRef}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-6"
+        style={{ opacity: pastHero ? 0 : 1, transition: "opacity 0.4s ease", pointerEvents: pastHero ? "none" : "auto" }}
       >
         {socialLinks.map((link) => (
           <a
@@ -239,7 +250,9 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 right-8 z-10 flex flex-col items-center gap-2">
+      <div className="absolute bottom-8 right-8 z-10 flex flex-col items-center gap-2"
+        style={{ opacity: pastHero ? 0 : 1, transition: "opacity 0.4s ease" }}
+      >
         <span className="text-[#E5E5E5]/30 text-xs tracking-widest uppercase rotate-90 origin-center translate-y-8">
           Scroll
         </span>

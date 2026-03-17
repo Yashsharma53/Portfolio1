@@ -74,30 +74,44 @@ export default function SharinganModel({ scrollProgress = 0 }: SharinganModelPro
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-    const p = scrollProgress;
+    const p = Math.min(scrollProgress, 1); // clamp position movement to 0-1
+    const fade = scrollProgress > 1 ? Math.max(0, 1 - (scrollProgress - 1)) : 1; // fade out after about
 
-    // Lerp position: right side (hero) → left side (about)
-    // Hero: x=2, About: x=-3 (left side where empty space is)
-    targetPos.current.set(
-      2 - p * 5,             // 2 → -3
-      0,                     // stay vertically centered
-      0
-    );
+    // Position: hero right → about left → skills heading (top-left, small)
+    let targetX: number;
+    let targetY: number;
+    let targetScale: number;
+
+    if (scrollProgress <= 1) {
+      // Hero → About
+      targetX = 2 - p * 5;        // 2 → -3
+      targetY = 0;
+      targetScale = 1;
+    } else {
+      // About → Skills heading (shrink and move to top-left area beside "Skills & Arsenal")
+      const t2 = fade; // 1 → 0 as we scroll past about
+      targetX = -3 + (1 - t2) * (-viewport.width / 2 + 1.8); // move to far left
+      targetY = (1 - t2) * 2.5; // move up
+      targetScale = 0.3 + t2 * 0.7; // 1 → 0.3
+    }
+
+    targetPos.current.set(targetX, targetY, 0);
 
     if (wrapperRef.current) {
       wrapperRef.current.position.lerp(targetPos.current, 0.08);
+      const currentScale = wrapperRef.current.scale.x;
+      const newScale = currentScale + (targetScale - currentScale) * 0.08;
+      wrapperRef.current.scale.set(newScale, newScale, newScale);
     }
 
-    // Rotation speed: slow (0.15) → fast (1.5) based on scroll
+    // Rotation speed: slow → fast based on scroll
     const rotSpeed = 0.15 + p * 1.35;
 
     if (groupRef.current) {
       groupRef.current.rotation.z = t * rotSpeed;
-      // Floating bob
       groupRef.current.position.y = Math.sin(t * 0.6) * 0.12;
     }
 
-    // Counter-rotate inner pattern
     const innerSpeed = 0.08 + p * 0.6;
     if (innerRef.current) {
       innerRef.current.rotation.z = -t * innerSpeed;

@@ -15,6 +15,19 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [lightMode, setLightMode] = useState(false);
+
+  const toggleTheme = useCallback(() => {
+    setLightMode((prev) => {
+      const next = !prev;
+      if (next) {
+        document.documentElement.setAttribute("data-theme", "light");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+      }
+      return next;
+    });
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,8 +74,8 @@ export default function Navbar() {
           width: scrolled ? "min(96%, 1200px)" : "100%",
           borderRadius: scrolled ? "16px" : "0px",
           background: scrolled
-            ? "rgba(10, 10, 10, 0.88)"
-            : "rgba(10, 10, 10, 0.6)",
+            ? (lightMode ? "rgba(255, 255, 255, 0.9)" : "rgba(10, 10, 10, 0.88)")
+            : (lightMode ? "rgba(255, 255, 255, 0.7)" : "rgba(10, 10, 10, 0.6)"),
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           border: scrolled
@@ -89,13 +102,59 @@ export default function Navbar() {
           {/* Logo */}
           <button
             onClick={() => scrollTo("#home")}
-            className="font-bold tracking-wider transition-all duration-500"
+            className="amaterasu-hover"
             style={{
-              color: "#DC2626",
-              fontSize: scrolled ? "24px" : "26px",
+              display: "flex",
+              alignItems: "center",
+              gap: "0",
+              background: "none",
+              border: "2px solid rgba(220, 38, 38, 0.3)",
+              borderRadius: "10px",
+              padding: scrolled ? "6px 14px" : "8px 16px",
+              cursor: "pointer",
+              transition: "all 0.5s ease",
+              position: "relative",
+              overflow: "visible",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "rgba(220, 38, 38, 0.7)";
+              e.currentTarget.style.boxShadow = "0 0 20px rgba(220, 38, 38, 0.2), inset 0 0 15px rgba(220, 38, 38, 0.05)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(220, 38, 38, 0.3)";
+              e.currentTarget.style.boxShadow = "none";
             }}
           >
-            YS<span className="text-white">.</span>
+            <span style={{
+              fontSize: scrolled ? "20px" : "22px",
+              fontWeight: "900",
+              fontFamily: "'Inter', sans-serif",
+              letterSpacing: "0.12em",
+              color: "#DC2626",
+              transition: "all 0.5s ease",
+            }}>
+              Y
+            </span>
+            <span style={{
+              fontSize: scrolled ? "20px" : "22px",
+              fontWeight: "900",
+              fontFamily: "'Inter', sans-serif",
+              letterSpacing: "0.12em",
+              color: lightMode ? "#1a1a1a" : "#E5E5E5",
+              transition: "all 0.5s ease",
+            }}>
+              S
+            </span>
+            <span style={{
+              fontSize: scrolled ? "26px" : "28px",
+              fontWeight: "900",
+              color: "#DC2626",
+              lineHeight: "0.6",
+              marginLeft: "1px",
+              transition: "all 0.5s ease",
+            }}>
+              .
+            </span>
           </button>
 
           {/* Desktop Links */}
@@ -111,16 +170,16 @@ export default function Navbar() {
                     className="relative py-1 font-medium uppercase tracking-widest transition-all duration-300"
                     style={{
                       fontSize: scrolled ? "13px" : "13px",
-                      color: isActive ? "#DC2626" : "rgba(255,255,255,0.6)",
+                      color: isActive ? "#DC2626" : (lightMode ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.6)"),
                     }}
                     onMouseEnter={(e) => {
                       if (!isActive)
-                        (e.target as HTMLElement).style.color = "#fff";
+                        (e.target as HTMLElement).style.color = lightMode ? "#000" : "#fff";
                     }}
                     onMouseLeave={(e) => {
                       if (!isActive)
                         (e.target as HTMLElement).style.color =
-                          "rgba(255,255,255,0.6)";
+                          lightMode ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.6)";
                     }}
                   >
                     {link.label}
@@ -139,6 +198,53 @@ export default function Navbar() {
             })}
           </ul>
 
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "36px",
+              height: "36px",
+              borderRadius: "50%",
+              border: "1px solid rgba(220, 38, 38, 0.3)",
+              background: lightMode ? "rgba(220, 38, 38, 0.1)" : "transparent",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              color: lightMode ? "#DC2626" : "rgba(255,255,255,0.6)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "#DC2626";
+              e.currentTarget.style.color = "#DC2626";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(220, 38, 38, 0.3)";
+              e.currentTarget.style.color = lightMode ? "#DC2626" : "rgba(255,255,255,0.6)";
+            }}
+          >
+            {lightMode ? (
+              /* Sun icon */
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+              </svg>
+            ) : (
+              /* Moon icon */
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            )}
+          </button>
+
           {/* Hamburger */}
           <button
             className="relative z-[60] flex h-8 w-8 flex-col items-center justify-center gap-[5px] md:hidden"
@@ -146,23 +252,24 @@ export default function Navbar() {
             aria-label="Toggle menu"
           >
             <span
-              className="block h-[2px] w-6 rounded-full bg-white transition-all duration-300"
+              className="block h-[2px] w-6 rounded-full transition-all duration-300"
               style={{
-                transform: mobileOpen
-                  ? "translateY(7px) rotate(45deg)"
-                  : "none",
+                background: lightMode ? "#000" : "#fff",
+                transform: mobileOpen ? "translateY(7px) rotate(45deg)" : "none",
               }}
             />
             <span
-              className="block h-[2px] w-6 rounded-full bg-white transition-all duration-300"
-              style={{ opacity: mobileOpen ? 0 : 1 }}
+              className="block h-[2px] w-6 rounded-full transition-all duration-300"
+              style={{
+                background: lightMode ? "#000" : "#fff",
+                opacity: mobileOpen ? 0 : 1,
+              }}
             />
             <span
-              className="block h-[2px] w-6 rounded-full bg-white transition-all duration-300"
+              className="block h-[2px] w-6 rounded-full transition-all duration-300"
               style={{
-                transform: mobileOpen
-                  ? "translateY(-7px) rotate(-45deg)"
-                  : "none",
+                background: lightMode ? "#000" : "#fff",
+                transform: mobileOpen ? "translateY(-7px) rotate(-45deg)" : "none",
               }}
             />
           </button>

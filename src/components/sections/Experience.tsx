@@ -1,12 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React from "react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { experience } from "@/data/portfolio";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const locationMap: Record<string, string> = {
   "Suvidha Foundation": "Remote",
@@ -14,164 +10,160 @@ const locationMap: Record<string, string> = {
 };
 
 export default function Experience() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate the vertical timeline line drawing
-      gsap.from(lineRef.current!, {
-        scaleY: 0,
-        transformOrigin: "top center",
-        duration: 1.5,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: timelineRef.current,
-          start: "top 75%",
-          end: "bottom 50%",
-          scrub: 1,
-        },
-      });
-
-      // Animate each timeline card
-      const cards = timelineRef.current?.querySelectorAll(".timeline-card");
-      cards?.forEach((card, i) => {
-        const direction = i % 2 === 0 ? -60 : 60;
-        gsap.from(card, {
-          x: direction,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      });
-
-      // Animate timeline dots
-      const dots = timelineRef.current?.querySelectorAll(".timeline-dot");
-      dots?.forEach((dot) => {
-        gsap.from(dot, {
-          scale: 0,
-          duration: 0.4,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: dot,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       id="experience"
-      className="py-24 md:py-32"
-      style={{ background: "rgba(10, 10, 10, 0.75)" }}
+      style={{ background: "transparent", paddingTop: "1rem", paddingBottom: "10rem" }}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 3rem" }}>
         <SectionTitle title="Experience" />
 
-        <div ref={timelineRef} className="relative mt-12">
-          {/* Vertical center line */}
-          <div
-            ref={lineRef}
-            className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#DC2626] via-[#DC2626]/50 to-transparent"
-          />
+        <div style={{ display: "flex", flexDirection: "column", gap: "2rem", marginTop: "1rem" }}>
+          {experience.map((exp, index) => (
+            <div
+              key={exp.company}
+              className="amaterasu-hover"
+              style={{
+                background: "rgba(26, 26, 46, 0.85)",
+                borderRadius: "16px",
+                border: "1px solid rgba(220, 38, 38, 0.15)",
+                overflow: "hidden",
+                transition: "transform 0.4s ease, border-color 0.4s ease",
+                position: "relative",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.borderColor = "rgba(220, 38, 38, 0.4)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.borderColor = "rgba(220, 38, 38, 0.15)";
+              }}
+            >
+              {/* Left red accent */}
+              <div style={{
+                position: "absolute",
+                left: 0,
+                top: 0,
+                bottom: 0,
+                width: "4px",
+                background: "linear-gradient(to bottom, #DC2626, #991B1B)",
+              }} />
 
-          <div className="flex flex-col gap-12">
-            {experience.map((exp, index) => {
-              const isLeft = index % 2 === 0;
-              return (
-                <div
-                  key={exp.company}
-                  className={`relative flex flex-col md:flex-row items-start ${
-                    isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* Timeline dot */}
-                  <div className="timeline-dot absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#DC2626] border-4 border-[#0A0A0A] z-10 mt-8" />
+              <div style={{ padding: "2rem 2.5rem 2rem 2.5rem", marginLeft: "4px" }}>
+                {/* Header */}
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem", marginBottom: "1rem" }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: "1.2rem" }}>
+                    {/* Number */}
+                    <div style={{
+                      fontSize: "2.5rem",
+                      fontWeight: "900",
+                      color: "rgba(220, 38, 38, 0.15)",
+                      lineHeight: "1",
+                      fontFamily: "monospace",
+                      userSelect: "none",
+                    }}>
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
 
-                  {/* Spacer for the other side on desktop */}
-                  <div className="hidden md:block md:w-1/2" />
+                    <div>
+                      <h3 style={{
+                        fontSize: "1.35rem",
+                        fontWeight: "bold",
+                        color: "#E5E5E5",
+                        marginBottom: "4px",
+                      }}>
+                        {exp.role}
+                      </h3>
+                      <span style={{
+                        fontSize: "0.95rem",
+                        fontWeight: "600",
+                        color: "#DC2626",
+                      }}>
+                        {exp.company}
+                      </span>
+                    </div>
+                  </div>
 
-                  {/* Card */}
-                  <div
-                    className={`timeline-card ml-12 md:ml-0 md:w-1/2 ${
-                      isLeft ? "md:pr-12" : "md:pl-12"
-                    }`}
-                  >
-                    <div
-                      className="p-6 rounded-xl border border-[#DC2626]/10 hover:border-[#DC2626]/30 transition-all duration-300"
-                      style={{ background: "#1A1A2E" }}
-                    >
-                      <div className="flex items-start justify-between gap-4 flex-wrap">
-                        <div>
-                          <h3 className="text-xl font-bold text-[#E5E5E5]">
-                            {exp.role}
-                          </h3>
-                          <p className="text-[#DC2626] font-medium mt-1">
-                            {exp.company}
-                          </p>
-                        </div>
-                        <div className="text-right shrink-0">
-                          <span className="text-[#E5E5E5]/50 text-sm">
-                            {exp.duration}
-                          </span>
-                          <div className="flex items-center gap-1 mt-1 text-[#E5E5E5]/40 text-xs">
-                            <svg
-                              className="w-3 h-3"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                              />
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                              />
-                            </svg>
-                            {locationMap[exp.company] || "On-site"}
-                          </div>
-                        </div>
-                      </div>
-
-                      <p className="mt-4 text-[#E5E5E5]/60 text-sm leading-relaxed">
-                        {exp.description}
-                      </p>
-
-                      <ul className="mt-4 space-y-2">
-                        {exp.highlights.map((h, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-2 text-[#E5E5E5]/50 text-sm"
-                          >
-                            <span className="mt-1.5 w-1 h-1 rounded-full bg-[#DC2626] shrink-0" />
-                            {h}
-                          </li>
-                        ))}
-                      </ul>
+                  {/* Duration & Location */}
+                  <div style={{ textAlign: "right", flexShrink: 0 }}>
+                    <div style={{
+                      fontSize: "0.85rem",
+                      color: "rgba(229, 229, 229, 0.5)",
+                      marginBottom: "4px",
+                    }}>
+                      {exp.duration}
+                    </div>
+                    <div style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "4px",
+                      padding: "3px 10px",
+                      fontSize: "0.7rem",
+                      fontWeight: "600",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                      color: "rgba(229, 229, 229, 0.5)",
+                      background: "rgba(220, 38, 38, 0.08)",
+                      borderRadius: "4px",
+                      border: "1px solid rgba(220, 38, 38, 0.15)",
+                    }}>
+                      <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      {locationMap[exp.company] || "On-site"}
                     </div>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+
+                {/* Description */}
+                <p style={{
+                  color: "rgba(229, 229, 229, 0.65)",
+                  fontSize: "0.9rem",
+                  lineHeight: "1.75",
+                  marginBottom: "1.2rem",
+                }}>
+                  {exp.description}
+                </p>
+
+                {/* Highlights */}
+                <div style={{
+                  paddingTop: "1rem",
+                  borderTop: "1px solid rgba(220, 38, 38, 0.1)",
+                }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                    {exp.highlights.map((h, i) => (
+                      <span
+                        key={i}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          padding: "5px 14px",
+                          fontSize: "0.75rem",
+                          fontWeight: "500",
+                          borderRadius: "6px",
+                          background: "rgba(220, 38, 38, 0.08)",
+                          color: "rgba(229, 229, 229, 0.7)",
+                          border: "1px solid rgba(220, 38, 38, 0.12)",
+                        }}
+                      >
+                        <span style={{
+                          width: "5px",
+                          height: "5px",
+                          borderRadius: "50%",
+                          background: "#DC2626",
+                          flexShrink: 0,
+                        }} />
+                        {h}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

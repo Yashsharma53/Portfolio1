@@ -65,7 +65,7 @@ export default function MagneticButton({
       : "none",
   };
 
-  const baseClasses = `inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-medium uppercase tracking-wider cursor-pointer ${className}`;
+  const baseClasses = `amaterasu-hover inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-medium uppercase tracking-wider cursor-pointer ${className}`;
 
   if (href) {
     return (

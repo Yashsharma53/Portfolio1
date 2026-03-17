@@ -36,10 +36,10 @@ export const education = [
 ];
 
 export const skills = {
-  languages: ["Python", "C/C++", "HTML", "CSS", "Java"],
-  frameworks: ["TensorFlow", "Keras", "Matplotlib", "Pandas"],
-  databases: ["MySQL"],
-  domains: ["Data Analytics", "Machine Learning", "Google Cloud Platform"],
+  languages: ["Python", "C/C++", "HTML", "CSS", "Java", "JavaScript", "TypeScript"],
+  frameworks: ["TensorFlow", "Keras", "Matplotlib", "Pandas", "Next.js", "React", "Three.js", "GSAP", "Tailwind CSS"],
+  databases: ["MySQL", "MongoDB", "NoSQL"],
+  domains: ["Data Analytics", "Machine Learning", "Google Cloud Platform", "Web Development"],
 };
 
 export const experience = [
