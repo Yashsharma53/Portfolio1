@@ -78,6 +78,7 @@ export default function Contact() {
     email: "",
     message: "",
   });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -85,9 +86,26 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    setStatus("sending");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -127,7 +145,7 @@ export default function Contact() {
               {contactItems.map((item) => (
                 <div
                   key={item.label}
-                  className="amaterasu-hover"
+                  className="contact-item"
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -166,7 +184,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <div style={{
+                    <div className="contact-item-label" style={{
                       fontSize: "0.7rem",
                       fontWeight: "600",
                       textTransform: "uppercase",
@@ -176,7 +194,7 @@ export default function Contact() {
                     }}>
                       {item.label}
                     </div>
-                    <div style={{
+                    <div className="contact-item-value" style={{
                       fontSize: "0.9rem",
                       color: "#E5E5E5",
                       fontWeight: "500",
@@ -376,9 +394,20 @@ export default function Contact() {
 
               <div style={{ marginTop: "0.5rem" }}>
                 <MagneticButton onClick={() => {}} variant="filled" className="hero-btn">
-                  Send Message
+                  {status === "sending" ? "Sending..." : "Send Message"}
                 </MagneticButton>
               </div>
+
+              {status === "success" && (
+                <p style={{ color: "#22c55e", fontSize: "0.85rem", marginTop: "0.5rem" }}>
+                  Message sent successfully! I&apos;ll get back to you soon.
+                </p>
+              )}
+              {status === "error" && (
+                <p style={{ color: "#ef4444", fontSize: "0.85rem", marginTop: "0.5rem" }}>
+                  Failed to send message. Please try again.
+                </p>
+              )}
             </form>
           </div>
         </div>

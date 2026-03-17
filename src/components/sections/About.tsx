@@ -59,10 +59,10 @@ export default function About() {
                   transition: "border-color 0.3s ease",
                 }}
               >
-                <div style={{ fontSize: "2rem", fontWeight: "bold", color: "#DC2626" }}>
+                <div className="stat-value" style={{ fontSize: "2rem", fontWeight: "bold", color: "#DC2626" }}>
                   {stat.value}
                 </div>
-                <div style={{ marginTop: "8px", fontSize: "0.75rem", color: "rgba(229,229,229,0.6)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                <div className="stat-label" style={{ marginTop: "8px", fontSize: "0.75rem", color: "rgba(229,229,229,0.6)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
                   {stat.label}
                 </div>
               </div>

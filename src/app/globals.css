@@ -10,22 +10,28 @@
 }
 
 [data-theme="light"] {
-  --background: #f5f5f5;
-  --foreground: #1a1a1a;
-  --surface: #ffffff;
+  --background: #FFF8E7;
+  --foreground: #2D1F0E;
+  --surface: #FFFDF5;
   --primary: #dc2626;
   --primary-light: #ef4444;
-  --muted: #6b7280;
+  --muted: #7A6652;
 }
 
-/* ===== Light Mode Overrides ===== */
+/* Crow wing flap animation */
+@keyframes crowFlap {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.75); }
+}
+
+/* ===== Light Mode Overrides (Cream: #FFF8E7) ===== */
 
 /* Section title — dark text in light mode */
 [data-theme="light"] h2 {
-  color: #1a1a1a !important;
+  color: #2D1F0E !important;
 }
 
-/* All light-gray text → dark text */
+/* All light-gray text → dark warm text */
 [data-theme="light"] p,
 [data-theme="light"] span,
 [data-theme="light"] div,
@@ -36,7 +42,7 @@
 
 /* Hero section */
 [data-theme="light"] #home h1 {
-  color: #1a1a1a !important;
+  color: #2D1F0E !important;
 }
 [data-theme="light"] #home h1:last-of-type {
   color: #DC2626 !important;
@@ -44,132 +50,174 @@
 
 /* About section */
 [data-theme="light"] #about {
-  background: linear-gradient(to right, rgba(245, 245, 245, 0.3) 0%, rgba(245, 245, 245, 0.3) 45%, rgba(245, 245, 245, 0.97) 50%, rgba(245, 245, 245, 0.97) 100%) !important;
+  background: linear-gradient(to right, rgba(255, 248, 231, 0.3) 0%, rgba(255, 248, 231, 0.3) 45%, rgba(255, 248, 231, 0.97) 50%, rgba(255, 248, 231, 0.97) 100%) !important;
 }
 [data-theme="light"] #about p {
-  color: #333333 !important;
+  color: #4A3728 !important;
 }
 [data-theme="light"] #about h3,
 [data-theme="light"] #about h4 {
-  color: #1a1a1a !important;
+  color: #2D1F0E !important;
 }
 
 /* Stat cards, skill cards, project cards, experience cards, contact cards */
 [data-theme="light"] .amaterasu-hover,
 [data-theme="light"] .stat-card {
-  background: rgba(255, 255, 255, 0.9) !important;
-  border-color: rgba(220, 38, 38, 0.2) !important;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  background: #FFF3D6 !important;
+  border-color: rgba(180, 150, 100, 0.3) !important;
+  box-shadow: 0 2px 16px rgba(80, 50, 20, 0.06);
 }
 
 /* Card text colors */
 [data-theme="light"] .amaterasu-hover h3,
 [data-theme="light"] .amaterasu-hover h4 {
-  color: #1a1a1a !important;
+  color: #2D1F0E !important;
 }
 [data-theme="light"] .amaterasu-hover p,
 [data-theme="light"] .amaterasu-hover span,
 [data-theme="light"] .amaterasu-hover div {
-  color: #444444;
+  color: #5C4033;
 }
 
 /* Skill tags and tech tags */
 [data-theme="light"] .amaterasu-hover span[style*="borderRadius: \"9999px\""],
 [data-theme="light"] .amaterasu-hover span[style*="border-radius"] {
   background: rgba(220, 38, 38, 0.06) !important;
-  color: #333 !important;
-  border-color: rgba(220, 38, 38, 0.25) !important;
+  color: #4A3728 !important;
+  border-color: rgba(220, 38, 38, 0.22) !important;
 }
 
 /* Progress bars */
 [data-theme="light"] div[style*="background: \"#0A0A0A\""],
 [data-theme="light"] div[style*="background: rgb(10, 10, 10)"] {
-  background: #e0e0e0 !important;
+  background: #E8DCC8 !important;
 }
 
 /* Section title heading */
 [data-theme="light"] div[style*="marginBottom: \"4rem\""] h2 {
-  color: #1a1a1a !important;
+  color: #2D1F0E !important;
+}
+/* Section title subtitle */
+[data-theme="light"] div[style*="marginBottom: \"4rem\""] p {
+  color: #6B5744 !important;
 }
 
-/* Skills section card backgrounds */
-[data-theme="light"] #skills div[style*="background: \"#1A1A2E\""] {
-  background: rgba(255, 255, 255, 0.9) !important;
+/* Skills section */
+[data-theme="light"] .skill-title {
+  color: #2D1F0E !important;
 }
-[data-theme="light"] #skills h3 {
-  color: #1a1a1a !important;
+[data-theme="light"] .skill-tag {
+  background: rgba(220, 38, 38, 0.05) !important;
+  color: #4A3728 !important;
+  border-color: rgba(220, 38, 38, 0.22) !important;
 }
-[data-theme="light"] #skills span {
-  color: #444 !important;
+[data-theme="light"] .skill-tag:hover {
+  color: #DC2626 !important;
+  border-color: rgba(220, 38, 38, 0.6) !important;
+}
+[data-theme="light"] .skill-proficiency,
+[data-theme="light"] .skill-proficiency span {
+  color: #7A6652 !important;
+}
+[data-theme="light"] .progress-track {
+  background: #E8DCC8 !important;
 }
 
 /* Projects section */
-[data-theme="light"] #projects h3 {
-  color: #1a1a1a !important;
+[data-theme="light"] .project-title {
+  color: #2D1F0E !important;
 }
-[data-theme="light"] #projects p {
-  color: #444 !important;
+[data-theme="light"] .project-desc {
+  color: #5C4033 !important;
 }
-[data-theme="light"] #projects div[style*="color: \"rgba(220, 38, 38"] {
+[data-theme="light"] .project-highlight {
+  color: #6B5744 !important;
+}
+[data-theme="light"] .project-tech-tag {
+  background: rgba(220, 38, 38, 0.06) !important;
   color: #DC2626 !important;
+  border-color: rgba(220, 38, 38, 0.2) !important;
 }
 
 /* Experience section */
-[data-theme="light"] #experience h3 {
-  color: #1a1a1a !important;
+[data-theme="light"] .exp-title {
+  color: #2D1F0E !important;
 }
-[data-theme="light"] #experience p {
-  color: #444 !important;
+[data-theme="light"] .exp-duration,
+[data-theme="light"] .exp-location {
+  color: #7A6652 !important;
 }
-[data-theme="light"] #experience span {
-  color: #555 !important;
+[data-theme="light"] .exp-desc {
+  color: #5C4033 !important;
+}
+[data-theme="light"] .exp-highlight {
+  color: #5C4033 !important;
+  background: rgba(220, 38, 38, 0.05) !important;
+  border-color: rgba(220, 38, 38, 0.18) !important;
 }
 
 /* Contact section */
 [data-theme="light"] #contact p {
-  color: #444 !important;
+  color: #5C4033 !important;
 }
 [data-theme="light"] #contact h3 {
-  color: #1a1a1a !important;
-}
-[data-theme="light"] #contact div[style*="color: \"#E5E5E5\""] {
-  color: #1a1a1a !important;
+  color: #2D1F0E !important;
 }
 [data-theme="light"] #contact input,
 [data-theme="light"] #contact textarea {
-  background: rgba(245, 245, 245, 0.9) !important;
-  border-color: rgba(220, 38, 38, 0.2) !important;
-  color: #1a1a1a !important;
+  background: rgba(255, 253, 245, 0.9) !important;
+  border-color: rgba(220, 38, 38, 0.18) !important;
+  color: #2D1F0E !important;
 }
 [data-theme="light"] #contact input::placeholder,
 [data-theme="light"] #contact textarea::placeholder {
-  color: rgba(0, 0, 0, 0.35) !important;
+  color: rgba(80, 50, 20, 0.4) !important;
 }
-
-/* Contact social icon buttons */
-[data-theme="light"] #contact a[style*="background: \"rgba(26, 26, 46"] {
-  background: rgba(255, 255, 255, 0.9) !important;
+[data-theme="light"] #contact label {
+  color: #7A6652 !important;
+}
+/* Contact info items */
+[data-theme="light"] .contact-item {
+  background: #FFF3D6 !important;
+  border-color: rgba(180, 150, 100, 0.3) !important;
+  box-shadow: 0 2px 16px rgba(80, 50, 20, 0.06);
+}
+[data-theme="light"] .contact-item-label {
+  color: #7A6652 !important;
+}
+[data-theme="light"] .contact-item-value {
+  color: #2D1F0E !important;
 }
 
 /* Footer */
-[data-theme="light"] footer {
-  background: rgba(245, 245, 245, 0.95) !important;
+[data-theme="light"] .site-footer {
+  background: #F5EDD8 !important;
+  border-color: rgba(180, 150, 100, 0.3) !important;
 }
-[data-theme="light"] footer p {
-  color: #555 !important;
+[data-theme="light"] .site-footer p {
+  color: #6B5744 !important;
+}
+[data-theme="light"] .site-footer a {
+  color: rgba(45, 31, 14, 0.5) !important;
+}
+[data-theme="light"] .site-footer a:hover {
+  color: #DC2626 !important;
 }
 
 /* Hero social links */
 [data-theme="light"] .text-\[\#E5E5E5\]\/50 {
-  color: rgba(0, 0, 0, 0.5) !important;
+  color: rgba(45, 31, 14, 0.55) !important;
+}
+[data-theme="light"] .text-\[\#E5E5E5\]\/50:hover {
+  color: #DC2626 !important;
 }
 [data-theme="light"] .text-\[\#E5E5E5\]\/30 {
-  color: rgba(0, 0, 0, 0.3) !important;
+  color: rgba(45, 31, 14, 0.3) !important;
 }
 
 /* Scroll indicator */
 [data-theme="light"] .text-\[\#E5E5E5\]\/70 {
-  color: rgba(0, 0, 0, 0.7) !important;
+  color: rgba(45, 31, 14, 0.7) !important;
 }
 
 /* About stat card values — keep red */
@@ -179,12 +227,12 @@
 
 /* Hamburger mobile menu panel */
 [data-theme="light"] .md\:hidden[style*="borderLeft"] {
-  background: rgba(255, 255, 255, 0.98) !important;
+  background: rgba(255, 248, 231, 0.98) !important;
 }
 
 /* Custom scrollbar for light mode */
 [data-theme="light"] ::-webkit-scrollbar-track {
-  background: #f0f0f0;
+  background: #F0E6D0;
 }
 [data-theme="light"] ::-webkit-scrollbar-thumb {
   background: #DC2626;
@@ -202,31 +250,26 @@
   color: #DC2626 !important;
 }
 
-/* About stat card labels */
-[data-theme="light"] #about div[style*="textTransform: \"uppercase\""] {
-  color: #666 !important;
+/* About stat cards */
+[data-theme="light"] .stat-label {
+  color: #7A6652 !important;
 }
-
-/* General dark backgrounds → light in light mode */
-[data-theme="light"] div[style*="background: \"rgba(26, 26, 46"] {
-  background: rgba(255, 255, 255, 0.9) !important;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-}
-[data-theme="light"] div[style*="background: \"#1A1A2E\""] {
-  background: rgba(255, 255, 255, 0.9) !important;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-}
-
-/* Contact info item text */
-[data-theme="light"] #contact div[style*="fontSize: \"0.9rem\""] {
-  color: #1a1a1a !important;
-}
-
-/* Red text should stay red */
-[data-theme="light"] span[style*="color: \"#DC2626\""],
-[data-theme="light"] div[style*="color: \"#DC2626\""],
-[data-theme="light"] a[style*="color: \"#DC2626\""] {
+[data-theme="light"] .stat-value {
   color: #DC2626 !important;
+}
+[data-theme="light"] #about .amaterasu-hover {
+  background: #FFF3D6 !important;
+  border-color: rgba(180, 150, 100, 0.3) !important;
+  box-shadow: 0 2px 16px rgba(80, 50, 20, 0.06);
+}
+
+/* Entry numbers (01, 02) and bullet dots */
+[data-theme="light"] .project-number,
+[data-theme="light"] .entry-number {
+  color: rgba(220, 38, 38, 0.35) !important;
+}
+[data-theme="light"] .project-dot {
+  background: #DC2626 !important;
 }
 
 /* Accent elements — visible on light */
@@ -235,18 +278,38 @@
 }
 
 /* Hero tagline */
-[data-theme="light"] #home p {
-  color: rgba(0, 0, 0, 0.6) !important;
-}
-
-/* Entry numbers (01, 02) */
-[data-theme="light"] div[style*="fontFamily: \"monospace\""] {
-  color: rgba(220, 38, 38, 0.2) !important;
+[data-theme="light"] .hero-tagline {
+  color: #5C4033 !important;
 }
 
 /* Amaterasu glow — lighter in light mode */
 [data-theme="light"] .amaterasu-hover:hover {
   box-shadow: 0 4px 20px rgba(220, 38, 38, 0.12) !important;
+}
+
+/* MagneticButton — preserve original colors in light mode */
+[data-theme="light"] .magnetic-btn {
+  background: unset !important;
+  box-shadow: unset !important;
+  border-color: unset !important;
+}
+[data-theme="light"] .magnetic-btn.magnetic-btn--filled {
+  background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%) !important;
+  color: #fff !important;
+}
+[data-theme="light"] .magnetic-btn.magnetic-btn--outlined {
+  background: transparent !important;
+  color: #DC2626 !important;
+  border-color: #DC2626 !important;
+}
+
+/* Card hover — grow 10% on hover */
+.amaterasu-hover:not(.magnetic-btn) {
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.amaterasu-hover:not(.magnetic-btn):hover {
+  transform: scale(1.03);
+  z-index: 10;
 }
 
 @theme inline {

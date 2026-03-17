@@ -192,7 +192,7 @@ export default function Hero() {
             </h1>
           </div>
 
-          <p style={{ fontSize: "clamp(0.9rem, 2.5vw, 1.25rem)", color: "rgba(229,229,229,0.7)", fontWeight: "300", letterSpacing: "0.05em" }}>
+          <p className="hero-tagline" style={{ fontSize: "clamp(0.9rem, 2.5vw, 1.25rem)", color: "rgba(229,229,229,0.7)", fontWeight: "300", letterSpacing: "0.05em" }}>
             Software Engineer | ML Enthusiast | Tech Ninja
           </p>
 

@@ -63,10 +63,10 @@ export default function Skills() {
                 borderRadius: "12px",
                 padding: "24px",
                 position: "relative",
-                transition: "box-shadow 0.3s ease",
+                transition: "transform 0.4s ease, box-shadow 0.4s ease",
               }}
             >
-              <h3 style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#E5E5E5", marginBottom: "16px" }}>
+              <h3 className="skill-title" style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#E5E5E5", marginBottom: "16px" }}>
                 {category.title}
               </h3>
 
@@ -75,6 +75,7 @@ export default function Skills() {
                 {category.items.map((item) => (
                   <span
                     key={item}
+                    className="skill-tag"
                     style={{
                       padding: "6px 12px",
                       fontSize: "0.875rem",
@@ -101,11 +102,11 @@ export default function Skills() {
 
               {/* Progress bar */}
               <div>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.875rem", color: "rgba(229,229,229,0.5)", marginBottom: "8px" }}>
+                <div className="skill-proficiency" style={{ display: "flex", justifyContent: "space-between", fontSize: "0.875rem", color: "rgba(229,229,229,0.5)", marginBottom: "8px" }}>
                   <span>Proficiency</span>
                   <span>{category.proficiency}%</span>
                 </div>
-                <div style={{ width: "100%", height: "6px", background: "#0A0A0A", borderRadius: "9999px", overflow: "hidden" }}>
+                <div className="progress-track" style={{ width: "100%", height: "6px", background: "#0A0A0A", borderRadius: "9999px", overflow: "hidden" }}>
                   <div
                     className="progress-fill"
                     data-width={category.proficiency}

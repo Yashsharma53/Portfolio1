@@ -41,11 +41,9 @@ export default function Projects() {
                 position: "relative",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
                 e.currentTarget.style.borderColor = "rgba(220, 38, 38, 0.4)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.borderColor = "rgba(220, 38, 38, 0.15)";
               }}
             >
@@ -59,7 +57,7 @@ export default function Projects() {
                 {/* Header row */}
                 <div style={{ display: "flex", alignItems: "flex-start", gap: "1.5rem", marginBottom: "1.5rem" }}>
                   {/* Project number */}
-                  <div style={{
+                  <div className="project-number" style={{
                     fontSize: "clamp(2rem, 4vw, 3rem)",
                     fontWeight: "900",
                     color: "rgba(220, 38, 38, 0.15)",
@@ -73,7 +71,7 @@ export default function Projects() {
 
                   <div style={{ flex: 1 }}>
                     {/* Title */}
-                    <h3 style={{
+                    <h3 className="project-title" style={{
                       fontSize: "1.5rem",
                       fontWeight: "bold",
                       color: "#E5E5E5",
@@ -102,7 +100,7 @@ export default function Projects() {
                 </div>
 
                 {/* Description */}
-                <p style={{
+                <p className="project-desc" style={{
                   color: "rgba(229, 229, 229, 0.7)",
                   fontSize: "0.95rem",
                   lineHeight: "1.8",
@@ -116,6 +114,7 @@ export default function Projects() {
                   {projectHighlights[project.title]?.map((highlight, idx) => (
                     <div
                       key={idx}
+                      className="project-highlight"
                       style={{
                         display: "flex",
                         alignItems: "flex-start",
@@ -125,7 +124,7 @@ export default function Projects() {
                         color: "rgba(229, 229, 229, 0.6)",
                       }}
                     >
-                      <span style={{
+                      <span className="project-dot" style={{
                         marginTop: "7px",
                         width: "6px",
                         height: "6px",
@@ -153,6 +152,7 @@ export default function Projects() {
                     {project.tech.map((t) => (
                       <span
                         key={t}
+                        className="project-tech-tag"
                         style={{
                           padding: "5px 14px",
                           fontSize: "0.75rem",

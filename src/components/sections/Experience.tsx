@@ -32,11 +32,9 @@ export default function Experience() {
                 position: "relative",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
                 e.currentTarget.style.borderColor = "rgba(220, 38, 38, 0.4)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.borderColor = "rgba(220, 38, 38, 0.15)";
               }}
             >
@@ -55,7 +53,7 @@ export default function Experience() {
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem", marginBottom: "1rem" }}>
                   <div style={{ display: "flex", alignItems: "flex-start", gap: "1.2rem" }}>
                     {/* Number */}
-                    <div style={{
+                    <div className="entry-number" style={{
                       fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
                       fontWeight: "900",
                       color: "rgba(220, 38, 38, 0.15)",
@@ -67,7 +65,7 @@ export default function Experience() {
                     </div>
 
                     <div>
-                      <h3 style={{
+                      <h3 className="exp-title" style={{
                         fontSize: "1.35rem",
                         fontWeight: "bold",
                         color: "#E5E5E5",
@@ -87,14 +85,14 @@ export default function Experience() {
 
                   {/* Duration & Location */}
                   <div style={{ textAlign: "right", flexShrink: 0 }}>
-                    <div style={{
+                    <div className="exp-duration" style={{
                       fontSize: "0.85rem",
                       color: "rgba(229, 229, 229, 0.5)",
                       marginBottom: "4px",
                     }}>
                       {exp.duration}
                     </div>
-                    <div style={{
+                    <div className="exp-location" style={{
                       display: "inline-flex",
                       alignItems: "center",
                       gap: "4px",
@@ -118,7 +116,7 @@ export default function Experience() {
                 </div>
 
                 {/* Description */}
-                <p style={{
+                <p className="exp-desc" style={{
                   color: "rgba(229, 229, 229, 0.65)",
                   fontSize: "0.9rem",
                   lineHeight: "1.75",
@@ -136,6 +134,7 @@ export default function Experience() {
                     {exp.highlights.map((h, i) => (
                       <span
                         key={i}
+                        className="exp-highlight"
                         style={{
                           display: "inline-flex",
                           alignItems: "center",

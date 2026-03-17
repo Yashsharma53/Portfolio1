@@ -6,6 +6,8 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import Loader from "@/components/ui/Loader";
 import Navbar from "@/components/ui/Navbar";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
+import CrowAnimation from "@/components/ui/CrowAnimation";
+import CrowBackground from "@/components/ui/CrowBackground";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
@@ -67,8 +69,11 @@ export default function Home() {
       <Loader onComplete={() => setLoading(false)} />
 
       {!loading && (
+        <>
+        <CrowBackground />
         <SmoothScroll>
           <Navbar />
+          <CrowAnimation />
 
           {/* 3D Background Scene */}
           {showScene && (
@@ -86,7 +91,7 @@ export default function Home() {
             <Contact />
 
             {/* Footer */}
-            <footer className="relative py-8 text-center border-t border-white/5" style={{ background: "rgba(10,10,10,0.85)" }}>
+            <footer className="site-footer relative py-8 text-center border-t border-white/5" style={{ background: "rgba(10,10,10,0.85)" }}>
               {/* Social icons */}
               <div style={{ display: "flex", justifyContent: "center", gap: "20px", marginBottom: "16px" }}>
                 <a href="https://github.com/Yashsharma53/" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(229,229,229,0.5)", transition: "color 0.3s" }} onMouseEnter={(e) => (e.currentTarget.style.color = "#DC2626")} onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(229,229,229,0.5)")}>
@@ -110,6 +115,7 @@ export default function Home() {
 
           <ScrollIndicator />
         </SmoothScroll>
+        </>
       )}
     </>
   );

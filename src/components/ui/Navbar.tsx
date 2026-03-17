@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { triggerCrows } from "@/lib/crowEvent";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
@@ -16,8 +17,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [lightMode, setLightMode] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
 
   const toggleTheme = useCallback(() => {
+    triggerCrows();
     setLightMode((prev) => {
       const next = !prev;
       if (next) {
@@ -32,6 +35,10 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
+      const heroEl = document.getElementById("home");
+      if (heroEl) {
+        setPastHero(window.scrollY > heroEl.offsetHeight - 100);
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -74,8 +81,8 @@ export default function Navbar() {
           width: scrolled ? "min(96%, 1200px)" : "100%",
           borderRadius: scrolled ? "16px" : "0px",
           background: scrolled
-            ? (lightMode ? "rgba(255, 255, 255, 0.9)" : "rgba(10, 10, 10, 0.88)")
-            : (lightMode ? "rgba(255, 255, 255, 0.7)" : "rgba(10, 10, 10, 0.6)"),
+            ? (lightMode ? "rgba(255, 248, 231, 0.95)" : "rgba(10, 10, 10, 0.88)")
+            : (lightMode ? "rgba(245, 235, 210, 0.85)" : "rgba(10, 10, 10, 0.6)"),
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           border: scrolled
@@ -86,10 +93,10 @@ export default function Navbar() {
           borderRight: scrolled ? undefined : "none",
           borderBottom: scrolled
             ? "1px solid rgba(220, 38, 38, 0.18)"
-            : "1px solid rgba(255,255,255,0.04)",
+            : lightMode ? "1px solid rgba(180, 160, 120, 0.25)" : "1px solid rgba(255,255,255,0.04)",
           boxShadow: scrolled
             ? "0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(220,38,38,0.06)"
-            : "none",
+            : lightMode ? "0 2px 8px rgba(80, 50, 20, 0.08)" : "none",
         }}
       >
         <div
@@ -140,7 +147,7 @@ export default function Navbar() {
               fontWeight: "900",
               fontFamily: "'Inter', sans-serif",
               letterSpacing: "0.12em",
-              color: lightMode ? "#1a1a1a" : "#E5E5E5",
+              color: lightMode ? "#2D1F0E" : "#E5E5E5",
               transition: "all 0.5s ease",
             }}>
               S
@@ -170,16 +177,16 @@ export default function Navbar() {
                     className="relative py-1 font-medium uppercase tracking-widest transition-all duration-300"
                     style={{
                       fontSize: scrolled ? "13px" : "13px",
-                      color: isActive ? "#DC2626" : (lightMode ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.6)"),
+                      color: isActive ? "#DC2626" : (lightMode ? "rgba(45,31,14,0.6)" : "rgba(255,255,255,0.6)"),
                     }}
                     onMouseEnter={(e) => {
                       if (!isActive)
-                        (e.target as HTMLElement).style.color = lightMode ? "#000" : "#fff";
+                        (e.target as HTMLElement).style.color = lightMode ? "#2D1F0E" : "#fff";
                     }}
                     onMouseLeave={(e) => {
                       if (!isActive)
                         (e.target as HTMLElement).style.color =
-                          lightMode ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.6)";
+                          lightMode ? "rgba(45,31,14,0.6)" : "rgba(255,255,255,0.6)";
                     }}
                   >
                     {link.label}
@@ -198,34 +205,36 @@ export default function Navbar() {
             })}
           </ul>
 
-          {/* Theme Toggle — desktop only */}
+          {/* Desktop Theme Toggle — only visible on hero section */}
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="hidden md:flex"
+            className="hidden md:flex items-center justify-center transition-all duration-300"
             style={{
-              alignItems: "center",
-              justifyContent: "center",
-              width: "36px",
-              height: "36px",
-              borderRadius: "50%",
-              border: "1px solid rgba(220, 38, 38, 0.3)",
-              background: lightMode ? "rgba(220, 38, 38, 0.1)" : "transparent",
+              width: "40px",
+              height: "40px",
+              borderRadius: "10px",
+              border: "1.5px solid rgba(220, 38, 38, 0.3)",
+              background: lightMode ? "rgba(255,248,231,0.4)" : "rgba(255,255,255,0.06)",
               cursor: "pointer",
-              transition: "all 0.3s ease",
-              color: lightMode ? "#DC2626" : "rgba(255,255,255,0.6)",
+              color: lightMode ? "#DC2626" : "rgba(255,255,255,0.7)",
+              opacity: pastHero ? 0 : 1,
+              pointerEvents: pastHero ? "none" : "auto",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "#DC2626";
-              e.currentTarget.style.color = "#DC2626";
+              e.currentTarget.style.borderColor = "rgba(220, 38, 38, 0.7)";
+              e.currentTarget.style.background = lightMode ? "rgba(220,38,38,0.1)" : "rgba(220,38,38,0.1)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = "rgba(220, 38, 38, 0.3)";
-              e.currentTarget.style.color = lightMode ? "#DC2626" : "rgba(255,255,255,0.6)";
+              e.currentTarget.style.background = lightMode ? "rgba(255,248,231,0.4)" : "rgba(255,255,255,0.06)";
             }}
           >
             {lightMode ? (
-              /* Sun icon */
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            ) : (
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="5" />
                 <line x1="12" y1="1" x2="12" y2="3" />
@@ -236,11 +245,6 @@ export default function Navbar() {
                 <line x1="21" y1="12" x2="23" y2="12" />
                 <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-              </svg>
-            ) : (
-              /* Moon icon */
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
             )}
           </button>
@@ -254,21 +258,21 @@ export default function Navbar() {
             <span
               className="block h-[2px] w-6 rounded-full transition-all duration-300"
               style={{
-                background: lightMode ? "#000" : "#fff",
+                background: lightMode ? "#2D1F0E" : "#fff",
                 transform: mobileOpen ? "translateY(7px) rotate(45deg)" : "none",
               }}
             />
             <span
               className="block h-[2px] w-6 rounded-full transition-all duration-300"
               style={{
-                background: lightMode ? "#000" : "#fff",
+                background: lightMode ? "#2D1F0E" : "#fff",
                 opacity: mobileOpen ? 0 : 1,
               }}
             />
             <span
               className="block h-[2px] w-6 rounded-full transition-all duration-300"
               style={{
-                background: lightMode ? "#000" : "#fff",
+                background: lightMode ? "#2D1F0E" : "#fff",
                 transform: mobileOpen ? "translateY(-7px) rotate(-45deg)" : "none",
               }}
             />
@@ -295,7 +299,7 @@ export default function Navbar() {
         style={{
           width: "260px",
           height: "100%",
-          background: lightMode ? "rgba(255, 255, 255, 0.97)" : "rgba(10, 10, 10, 0.97)",
+          background: lightMode ? "rgba(255, 248, 231, 0.97)" : "rgba(10, 10, 10, 0.97)",
           backdropFilter: "blur(20px)",
           borderLeft: "1px solid rgba(220, 38, 38, 0.15)",
           boxShadow: mobileOpen ? "-8px 0 30px rgba(0,0,0,0.3)" : "none",
@@ -322,7 +326,7 @@ export default function Navbar() {
                   textTransform: "uppercase",
                   letterSpacing: "0.12em",
                   textAlign: "left",
-                  color: isActive ? "#DC2626" : (lightMode ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.6)"),
+                  color: isActive ? "#DC2626" : (lightMode ? "rgba(45,31,14,0.6)" : "rgba(255,255,255,0.6)"),
                   background: isActive ? "rgba(220, 38, 38, 0.08)" : "none",
                   border: "none",
                   borderLeft: isActive ? "3px solid #DC2626" : "3px solid transparent",
@@ -380,11 +384,10 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile floating theme toggle — bottom left */}
+      {/* Floating theme toggle — mobile: always visible, desktop: only after scrolling past hero */}
       <button
         onClick={toggleTheme}
         aria-label="Toggle theme"
-        className="md:hidden"
         style={{
           position: "fixed",
           bottom: "24px",
@@ -394,7 +397,7 @@ export default function Navbar() {
           height: "52px",
           borderRadius: "50%",
           border: "2px solid rgba(220, 38, 38, 0.4)",
-          background: lightMode ? "rgba(255,255,255,0.9)" : "rgba(10, 10, 10, 0.9)",
+          background: lightMode ? "rgba(255,248,231,0.92)" : "rgba(10, 10, 10, 0.9)",
           backdropFilter: "blur(10px)",
           display: "flex",
           alignItems: "center",
@@ -404,6 +407,7 @@ export default function Navbar() {
           boxShadow: "0 4px 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(220,38,38,0.1)",
           transition: "all 0.3s ease",
         }}
+        className="md:hidden"
       >
         {lightMode ? (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
