@@ -197,10 +197,10 @@ export default function Hero() {
           </p>
 
           <div ref={ctaRef} style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "clamp(12px, 2vw, 24px)", marginTop: "clamp(1rem, 3vw, 1.5rem)" }}>
-            <MagneticButton href="#projects" variant="filled" className="px-9 py-4 text-base">
+            <MagneticButton href="#projects" variant="filled" className="hero-btn">
               View Projects
             </MagneticButton>
-            <MagneticButton href="#contact" variant="outlined" className="px-9 py-4 text-base">
+            <MagneticButton href="#contact" variant="outlined" className="hero-btn">
               Contact Me
             </MagneticButton>
           </div>

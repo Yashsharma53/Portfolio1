@@ -375,7 +375,7 @@ export default function Contact() {
               </div>
 
               <div style={{ marginTop: "0.5rem" }}>
-                <MagneticButton onClick={() => {}} variant="filled" className="px-9 py-4 text-base">
+                <MagneticButton onClick={() => {}} variant="filled" className="hero-btn">
                   Send Message
                 </MagneticButton>
               </div>

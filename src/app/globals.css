@@ -305,6 +305,12 @@ section {
   border-color: rgba(40, 0, 70, 0.6) !important;
 }
 
+/* Hero CTA buttons */
+.hero-btn {
+  padding: 16px 36px;
+  font-size: 1rem;
+}
+
 /* ===== Mobile Responsive Overrides ===== */
 @media (max-width: 768px) {
   /* About section: full width on mobile */
@@ -316,6 +322,12 @@ section {
   /* Grids stack on mobile */
   .mobile-stack {
     grid-template-columns: 1fr !important;
+  }
+
+  /* Hero buttons smaller on mobile */
+  .hero-btn {
+    padding: 10px 15px !important;
+    font-size: 0.75rem !important;
   }
 
   /* Reduce section padding on mobile */
