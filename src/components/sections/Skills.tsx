@@ -49,10 +49,10 @@ export default function Skills() {
       id="skills"
       style={{ background: "transparent", paddingTop: "1rem", paddingBottom: "10rem" }}
     >
-      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 3rem" }}>
+      <div className="section-container" style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 clamp(1.25rem, 3vw, 3rem)" }}>
         <SectionTitle title="Skills & Arsenal" />
 
-        <div ref={cardsRef} style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px", marginTop: "3rem" }}>
+        <div ref={cardsRef} className="mobile-stack" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "clamp(16px, 2vw, 24px)", marginTop: "clamp(1.5rem, 3vw, 3rem)" }}>
           {skillCategories.map((category) => (
             <div
               key={category.title}

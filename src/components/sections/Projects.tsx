@@ -23,10 +23,10 @@ export default function Projects() {
       id="projects"
       style={{ background: "transparent", paddingTop: "1rem", paddingBottom: "6rem" }}
     >
-      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 3rem" }}>
+      <div className="section-container" style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 clamp(1.25rem, 3vw, 3rem)" }}>
         <SectionTitle title="Projects" />
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "2rem", marginTop: "1rem" }}>
+        <div className="mobile-stack" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "clamp(1rem, 2vw, 2rem)", marginTop: "1rem" }}>
           {projects.map((project, index) => (
             <div
               key={project.title}
@@ -55,12 +55,12 @@ export default function Projects() {
                 background: "linear-gradient(to right, #DC2626, #991B1B, transparent)",
               }} />
 
-              <div style={{ padding: "2.5rem 3rem" }}>
+              <div style={{ padding: "clamp(1.25rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 3rem)" }}>
                 {/* Header row */}
                 <div style={{ display: "flex", alignItems: "flex-start", gap: "1.5rem", marginBottom: "1.5rem" }}>
                   {/* Project number */}
                   <div style={{
-                    fontSize: "3rem",
+                    fontSize: "clamp(2rem, 4vw, 3rem)",
                     fontWeight: "900",
                     color: "rgba(220, 38, 38, 0.15)",
                     lineHeight: "1",

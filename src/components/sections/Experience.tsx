@@ -15,7 +15,7 @@ export default function Experience() {
       id="experience"
       style={{ background: "transparent", paddingTop: "1rem", paddingBottom: "10rem" }}
     >
-      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 3rem" }}>
+      <div className="section-container" style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 clamp(1.25rem, 3vw, 3rem)" }}>
         <SectionTitle title="Experience" />
 
         <div style={{ display: "flex", flexDirection: "column", gap: "2rem", marginTop: "1rem" }}>
@@ -50,13 +50,13 @@ export default function Experience() {
                 background: "linear-gradient(to bottom, #DC2626, #991B1B)",
               }} />
 
-              <div style={{ padding: "2rem 2.5rem 2rem 2.5rem", marginLeft: "4px" }}>
+              <div style={{ padding: "clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 3vw, 2.5rem)", marginLeft: "4px" }}>
                 {/* Header */}
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem", marginBottom: "1rem" }}>
                   <div style={{ display: "flex", alignItems: "flex-start", gap: "1.2rem" }}>
                     {/* Number */}
                     <div style={{
-                      fontSize: "2.5rem",
+                      fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
                       fontWeight: "900",
                       color: "rgba(220, 38, 38, 0.15)",
                       lineHeight: "1",

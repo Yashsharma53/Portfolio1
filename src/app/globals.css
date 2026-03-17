@@ -304,3 +304,33 @@ section {
   animation: amaterasu-glow 1.2s ease-in-out infinite;
   border-color: rgba(40, 0, 70, 0.6) !important;
 }
+
+/* ===== Mobile Responsive Overrides ===== */
+@media (max-width: 768px) {
+  /* About section: full width on mobile */
+  #about .about-content {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  /* Grids stack on mobile */
+  .mobile-stack {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Reduce section padding on mobile */
+  .section-container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  /* Smaller project/experience numbers */
+  .entry-number {
+    font-size: 2rem !important;
+  }
+
+  /* Form card padding */
+  .form-card {
+    padding: 1.5rem !important;
+  }
+}

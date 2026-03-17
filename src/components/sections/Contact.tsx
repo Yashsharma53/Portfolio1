@@ -105,10 +105,10 @@ export default function Contact() {
       id="contact"
       style={{ background: "transparent", paddingTop: "1rem", paddingBottom: "6rem" }}
     >
-      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 3rem" }}>
+      <div className="section-container" style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 clamp(1.25rem, 3vw, 3rem)" }}>
         <SectionTitle title="Get In Touch" />
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", marginTop: "1rem" }}>
+        <div className="mobile-stack" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(1.5rem, 3vw, 3rem)", marginTop: "1rem" }}>
           {/* Left — Contact Info */}
           <div>
             {/* Intro text */}
@@ -294,7 +294,7 @@ export default function Contact() {
               background: "rgba(26, 26, 46, 0.85)",
               borderRadius: "16px",
               border: "1px solid rgba(220, 38, 38, 0.15)",
-              padding: "2.5rem",
+              padding: "clamp(1.5rem, 3vw, 2.5rem)",
               position: "relative",
               overflow: "hidden",
             }}

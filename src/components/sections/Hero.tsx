@@ -182,24 +182,21 @@ export default function Hero() {
 
       <div className="relative z-10 w-full">
         {/* Text content — left aligned, shifted right with margin */}
-        <div className="flex flex-col gap-6" style={{ paddingLeft: "clamp(3rem, 15vw, 20rem)" }}>
+        <div className="flex flex-col gap-4 md:gap-6" style={{ paddingLeft: "clamp(1.5rem, 15vw, 20rem)" }}>
           <div ref={nameRef}>
-            <h1 className="text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter text-[#E5E5E5] leading-none">
+            <h1 style={{ fontSize: "clamp(3rem, 10vw, 8rem)", fontWeight: "900", letterSpacing: "-0.04em", color: "#E5E5E5", lineHeight: "1" }}>
               {renderChars("YASH", "char-yash")}
             </h1>
-            <h1 className="text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter text-[#DC2626] leading-none mt-2">
+            <h1 style={{ fontSize: "clamp(3rem, 10vw, 8rem)", fontWeight: "900", letterSpacing: "-0.04em", color: "#DC2626", lineHeight: "1", marginTop: "0.5rem" }}>
               {renderChars("SHARMA", "char-sharma")}
             </h1>
           </div>
 
-          <p
-            ref={taglineRef}
-            className="text-lg md:text-xl text-[#E5E5E5]/70 font-light tracking-wide"
-          >
+          <p style={{ fontSize: "clamp(0.9rem, 2.5vw, 1.25rem)", color: "rgba(229,229,229,0.7)", fontWeight: "300", letterSpacing: "0.05em" }}>
             Software Engineer | ML Enthusiast | Tech Ninja
           </p>
 
-          <div ref={ctaRef} className="flex items-center gap-6 mt-6">
+          <div ref={ctaRef} style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "clamp(12px, 2vw, 24px)", marginTop: "clamp(1rem, 3vw, 1.5rem)" }}>
             <MagneticButton href="#projects" variant="filled" className="px-9 py-4 text-base">
               View Projects
             </MagneticButton>

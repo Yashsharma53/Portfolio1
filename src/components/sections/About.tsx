@@ -29,7 +29,7 @@ export default function About() {
       id="about"
       style={{ background: "linear-gradient(to right, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.3) 45%, rgba(10, 10, 10, 0.95) 50%, rgba(10, 10, 10, 0.95) 100%)", paddingTop: "1rem", paddingBottom: "6rem" }}
     >
-      <div className="w-full" style={{ paddingLeft: "50%", paddingRight: "3rem" }}>
+      <div className="w-full about-content" style={{ paddingLeft: "clamp(1.5rem, 50vw, 50%)", paddingRight: "clamp(1.5rem, 3vw, 3rem)" }}>
         {/* Heading */}
         <div style={{ marginTop: "0" }}>
           <SectionTitle title="About Me" />
