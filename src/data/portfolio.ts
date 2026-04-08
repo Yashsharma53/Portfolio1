@@ -11,7 +11,7 @@ export const personalInfo = {
   tagline:
     "Like Itachi who mastered every jutsu in silence, I craft intelligent systems in the shadows of data — precision, patience, and purpose.",
   about:
-    "Much like Itachi Uchiha, who sacrificed everything while operating from the shadows to protect what mattered most, I believe in quiet mastery and relentless dedication. I am a Computer Science engineer with a deep passion for Machine Learning, Data Analytics, and Cloud Computing. I approach every problem the way Itachi approached battle — with calm analysis, meticulous preparation, and decisive execution. From building deep-learning models for medical imaging to classifying patterns hidden in data, I thrive on turning complexity into clarity. My goal is to leave a lasting impact through technology, one well-crafted solution at a time.",
+    "I am a Computer Science Engineer with a B.Tech from G.B. Pant Government Engineering College (GGSIPU, 8.34 GPA), specializing in Machine Learning, Data Analytics, and Cloud Computing. I have built deep-learning models for medical imaging — including skin lesion segmentation using ResUNet architecture — and designed supervised ML pipelines for classification tasks using algorithms like SVM and KNN. Proficient in Python, TensorFlow, Keras, OpenCV, and Google Cloud Platform, I combine strong analytical thinking with a passion for solving real-world problems through data-driven solutions. My goal is to turn complexity into clarity, one well-engineered solution at a time.",
 };
 
 export const education = [
